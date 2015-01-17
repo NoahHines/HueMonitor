@@ -8,6 +8,7 @@
 
 #import "MMWatchPixelController.h"
 #import "MMWatchPixel.h"
+#import "MMHueRequest.h"
 
 @interface MMWatchPixelController ()
 
@@ -48,8 +49,11 @@
 // This gets called repeatedly by an NSTimer when monitoring
 - (void) repeatPixels:(NSTimer *) timer
 {
+    int currentPixelCounter = 0;
     for (MMWatchPixel *pixel in self.pixelArray) {
         NSLog(@"%@", [pixel getCurrentColor]);
+        [MMHueRequest sendColor:[self.pixelArray[currentPixelCounter] getCurrentColor] toLights:@[@(currentPixelCounter+1)]];
+        currentPixelCounter++;
     }
 }
 

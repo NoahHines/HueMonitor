@@ -11,6 +11,6 @@
 
 @interface MMHueRequest : NSObject
 
-+ (void)sendColor:(NSColor *)colorToSend;
++ (void)sendColor:(NSColor *)colorToSend toLights:(NSArray *)lightsArray;
 
 @end
