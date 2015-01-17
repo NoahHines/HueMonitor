@@ -690,37 +690,29 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dv9-Lw-Lpu">
+                            <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dv9-Lw-Lpu">
                                 <rect key="frame" x="177" y="116" width="25" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="a5C-pN-W44"/>
-                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="JY6-g9-NmP">
                                     <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="XBG-vw-bw3"/>
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="Xlf-F2-0B3" name="editable" keyPath="values" id="RbX-Qf-86q"/>
-                                </connections>
                             </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ujE-3U-P5F" firstAttribute="top" secondItem="Z5d-Ws-GSv" secondAttribute="bottom" constant="32" id="3q8-f6-fpM"/>
                             <constraint firstAttribute="centerX" secondItem="Z5d-Ws-GSv" secondAttribute="centerX" constant="-33" id="Apk-FC-wmE"/>
-                            <constraint firstItem="Z5d-Ws-GSv" firstAttribute="leading" secondItem="Dv9-Lw-Lpu" secondAttribute="trailing" constant="8" id="Czk-GI-IH9"/>
                             <constraint firstAttribute="centerX" secondItem="ujE-3U-P5F" secondAttribute="centerX" id="WPS-zm-GN9"/>
                             <constraint firstItem="Dv9-Lw-Lpu" firstAttribute="centerY" secondItem="Z5d-Ws-GSv" secondAttribute="centerY" constant="0.5" id="cUK-Xc-zMo"/>
                             <constraint firstAttribute="centerY" secondItem="ujE-3U-P5F" secondAttribute="centerY" id="vzR-Qm-uyz"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="numberOfHotspots" destination="Dv9-Lw-Lpu" id="YUp-Xe-wYn"/>
+                        <outlet property="numberOfHotspots" destination="Dv9-Lw-Lpu" id="ffC-Gd-mh7"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController representsSharedInstance="YES" id="Xlf-F2-0B3"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>

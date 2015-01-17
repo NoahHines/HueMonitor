@@ -11,6 +11,8 @@
 
 @interface ViewController ()
 @property (weak) IBOutlet NSTextField *numberOfHotspots;
+@property (strong, atomic) NSMutableArray *hotspotArray;
+@property (strong, atomic) id hotspotSelectionMonitor;
 
 @end
 
@@ -18,12 +20,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.numberOfHotspots.stringValue = @"3";
+    self.hotspotArray = [[NSMutableArray alloc] init];
 
     // Do any additional setup after loading the view.
 }
 - (IBAction)setHotspots:(id)sender {
-    [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask handler:^(NSEvent *event) {
+    if(self.numberOfHotspots.stringValue.integerValue == 0)
+    {
+        // Not a valid number of hotspots maybe?
+        return;
+    }
+    self.numberOfHotspots.editable = NO;
+    self.hotspotArray = [[NSMutableArray alloc] init];
+    // Hide window for hotspot selection
+    [self.view.window orderOut:nil];
+    
+    self.hotspotSelectionMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask handler:^(NSEvent *event) {
         NSLog(@"%f,%f",event.locationInWindow.x,event.locationInWindow.y);
+        [self.hotspotArray addObject:event];
+        if(self.hotspotArray.count == self.numberOfHotspots.stringValue.integerValue)
+        {
+            [NSEvent removeMonitor:self.hotspotSelectionMonitor];
+            [self.view.window orderFrontRegardless];
+            self.numberOfHotspots.editable = YES;
+        }
     }];
 }
 
