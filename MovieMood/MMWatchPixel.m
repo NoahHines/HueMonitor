@@ -11,6 +11,8 @@
 @interface MMWatchPixel ()
 
 @property CGDirectDisplayID displayID;
+@property int squareLength;
+@property int pixelPerWidth;
 
 @end
 
@@ -23,6 +25,8 @@
     {
         location.y = [NSScreen mainScreen].frame.size.height - location.y;
         _location = location;
+        _squareLength = 20;
+        _pixelPerWidth = 10;
         
         CGDirectDisplayID id;
         CGGetDisplaysWithPoint(location, 1, &id, nil);
@@ -38,11 +42,31 @@
 
 - (NSColor *) getCurrentColor
 {
-    CGImageRef image = CGDisplayCreateImageForRect(self.displayID, CGRectMake(self.location.x, self.location.y, 1, 1));
+    CGImageRef image = CGDisplayCreateImageForRect(self.displayID, CGRectMake(self.location.x - self.squareLength/2, self.location.y - self.squareLength/2, self.squareLength/2, self.squareLength/2));
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
     CGImageRelease(image);
-    NSColor *color = [bitmap colorAtX:0 y:0];
+    
+    int currHue = 0;
+    int currSat = 0;
+    int currBri = 0;
+    for (int i = -1*self.squareLength/2; i <= self.squareLength/2; i+=self.pixelPerWidth) {
+        for (int j = self.squareLength/2; j >= -1*self.squareLength/2; j-=self.pixelPerWidth) {
+            currHue += [[bitmap colorAtX:i y:j] hueComponent]*65280.0;
+            currSat += [[bitmap colorAtX:i y:j] saturationComponent]*255.0;
+            currBri += [[bitmap colorAtX:i y:j] brightnessComponent]*255.0;
+            
+            NSLog(@"Here is the currBri: %i", currBri);
+        }
+    }
+    int dividend = self.squareLength/(self.pixelPerWidth) + 1;
+    currHue /= pow(dividend, 2);
+    currSat /= pow(dividend, 2);
+    currBri /= pow(dividend, 2);
+    
+    NSColor *color = [NSColor colorWithCalibratedHue:currHue saturation:currSat brightness:currBri alpha:1.0];
     return color;
 }
+
+
 
 @end
