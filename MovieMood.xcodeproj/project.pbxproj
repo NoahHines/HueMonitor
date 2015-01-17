@@ -13,6 +13,7 @@
 		118E81F71A6A13890081E6E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 118E81F61A6A13890081E6E5 /* Images.xcassets */; };
 		118E81FA1A6A13890081E6E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 118E81F81A6A13890081E6E5 /* Main.storyboard */; };
 		118E82061A6A13890081E6E5 /* MovieMoodTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E82051A6A13890081E6E5 /* MovieMoodTests.m */; };
+		C284E70B1A6A20B400D74F2F /* HueSDK_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C284E70A1A6A20B400D74F2F /* HueSDK_OSX.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		118E81FF1A6A13890081E6E5 /* MovieMoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieMoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		118E82041A6A13890081E6E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		118E82051A6A13890081E6E5 /* MovieMoodTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieMoodTests.m; sourceTree = "<group>"; };
+		C284E70A1A6A20B400D74F2F /* HueSDK_OSX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HueSDK_OSX.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C284E70B1A6A20B400D74F2F /* HueSDK_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +88,7 @@
 				118E81F41A6A13890081E6E5 /* ViewController.m */,
 				118E81F61A6A13890081E6E5 /* Images.xcassets */,
 				118E81F81A6A13890081E6E5 /* Main.storyboard */,
+				C284E70A1A6A20B400D74F2F /* HueSDK_OSX.framework */,
 				118E81EC1A6A13890081E6E5 /* Supporting Files */,
 			);
 			path = MovieMood;
@@ -93,6 +97,7 @@
 		118E81EC1A6A13890081E6E5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C284E7081A6A20AB00D74F2F /* Lumberjack */,
 				118E81ED1A6A13890081E6E5 /* Info.plist */,
 				118E81F11A6A13890081E6E5 /* main.m */,
 			);
@@ -114,6 +119,21 @@
 				118E82041A6A13890081E6E5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C284E7081A6A20AB00D74F2F /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				C284E7091A6A20AB00D74F2F /* Extensions */,
+			);
+			path = Lumberjack;
+			sourceTree = "<group>";
+		};
+		C284E7091A6A20AB00D74F2F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,8 +352,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/altitudes/code/PhilipsHueSDK-iOS-OSX-master/QuickStartApp_OSX",
+					"$(PROJECT_DIR)/MovieMood",
+				);
 				INFOPLIST_FILE = MovieMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = "-fno-objc-arc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -343,8 +369,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/altitudes/code/PhilipsHueSDK-iOS-OSX-master/QuickStartApp_OSX",
+					"$(PROJECT_DIR)/MovieMood",
+				);
 				INFOPLIST_FILE = MovieMood/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -404,6 +436,7 @@
 				118E820B1A6A13890081E6E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		118E820C1A6A13890081E6E5 /* Build configuration list for PBXNativeTarget "MovieMoodTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +445,7 @@
 				118E820E1A6A13890081E6E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
