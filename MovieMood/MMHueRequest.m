@@ -26,8 +26,6 @@
     for (NSNumber *currentId in lightsArray) {
         
         // URL is hardcoded to default Philips Hue url
-        NSString * urlStr = [NSString stringWithFormat:@"http://10.0.1.2/api/newdeveloper/lights/%@/state/", currentId];
-        NSLog(urlStr);
         
         NSURL *url = [NSURL URLWithString:urlStr];
         NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
