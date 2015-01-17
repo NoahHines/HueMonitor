@@ -7,24 +7,20 @@
 //
 
 #import "ViewController.h"
+#import "MMHueRequest.h"
 @import AppKit;
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSPoint origin = NSMakePoint(100, 100);
-    //[self.focusView lockFocus];
-    //NSColor *topColor = NSReadPixel(origin);
-    //[self.view unlockFocus];
     
-    CGDirectDisplayID ids[10];
-    CGGetDisplaysWithPoint(origin, 10, ids, nil);
-    CGImageRef image = CGDisplayCreateImageForRect(ids[0], CGRectMake(0, 0, 1, 1));
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
-    NSColor *color = [bitmap colorAtX:0 y:0];
+    //216	57	52
     
-    NSLog(@"%f, %f, %f",color.redComponent,color.greenComponent,color.blueComponent);
+    NSColor *myColor = [NSColor colorWithCalibratedRed:(216/255.0) green:(57/255.0) blue:(52/255.0) alpha:1.0f];
+
+    [MMHueRequest sendColor:myColor];
+    
 
     // Do any additional setup after loading the view.
 }

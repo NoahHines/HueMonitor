@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@import AppKit;
 
 @interface MMHueRequest : NSObject
 
-+ (void)setColorConnectLights:(NSNumber *)hueValue;
++ (void)sendColor:(NSColor *)colorToSend;
 
 @end
