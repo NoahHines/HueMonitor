@@ -8,6 +8,7 @@
 
 #import "MMWatchPixelController.h"
 #import "MMWatchPixel.h"
+#import "MMHueRequest.m"
 
 @interface MMWatchPixelController ()
 
@@ -50,12 +51,13 @@
 {
     for (MMWatchPixel *pixel in self.pixelArray) {
         NSLog(@"%@", [pixel getCurrentColor]);
+        [MMHueRequest sendColor:[pixel getCurrentColor]];
     }
 }
 
 - (void) startMonitoring
 {
-    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
+    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.75 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.monitorTimer forMode:NSDefaultRunLoopMode];
 }
 

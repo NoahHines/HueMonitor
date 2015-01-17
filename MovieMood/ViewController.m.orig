@@ -7,15 +7,17 @@
 //
 
 #import "ViewController.h"
+<<<<<<< HEAD
+#import "MMHueRequest.h"
+=======
 #import "MMWatchPixelController.h"
+>>>>>>> mark
 @import AppKit;
 
 @interface ViewController ()
 @property (weak) IBOutlet NSTextField *numberOfHotspots;
 @property (strong, atomic) MMWatchPixelController *hotspotController;
 @property (strong, atomic) id hotspotSelectionMonitor;
-@property (strong, atomic) NSStatusItem *menuBar;
-@property (weak) IBOutlet NSButtonCell *monitorButton;
 
 @end
 
@@ -23,20 +25,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+<<<<<<< HEAD
+    
+    //216	57	52
+    
+    NSColor *myColor = [NSColor colorWithCalibratedRed:(216/255.0) green:(57/255.0) blue:(52/255.0) alpha:1.0f];
+
+    [MMHueRequest sendColor:myColor];
+    
+=======
     self.numberOfHotspots.stringValue = @"3";
     self.hotspotController = [[MMWatchPixelController alloc] init];
-    
-    // Sets up menu bar
-    NSStatusBar *bar = [NSStatusBar systemStatusBar];
-    self.menuBar = [[NSStatusItem alloc] init];
-    self.menuBar = [bar statusItemWithLength:NSVariableStatusItemLength];
-    
-    [self.menuBar.button setImage:[NSImage imageNamed:@"off"]];
-    [self.menuBar setHighlightMode:YES];
-    [self.menuBar setEnabled:YES];
-    self.menuBar.button.action = @selector(toggleMonitoring:);
-    
-
+>>>>>>> mark
 
     // Do any additional setup after loading the view.
 }
@@ -63,16 +63,14 @@
     }];
 }
 - (IBAction)toggleMonitoring:(NSButton *)sender {
-    if([self.monitorButton.title isEqualToString:@"Start Monitoring"])
+    if([sender.title isEqualToString:@"Start Monitoring"])
     {
-        self.monitorButton.title = @"Stop Monitoring";
-        [self.menuBar.button setImage:[NSImage imageNamed:@"on"]];
+        sender.title = @"Stop Monitoring";
         [self.hotspotController startMonitoring];
     }
     else
     {
-        self.monitorButton.title = @"Start Monitoring";
-        [self.menuBar.button setImage:[NSImage imageNamed:@"off"]];
+        sender.title = @"Start Monitoring";
         [self.hotspotController stopMonitoring];
     }
 }

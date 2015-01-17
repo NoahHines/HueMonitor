@@ -10,12 +10,15 @@
 
 @interface AppDelegate ()
 
+@property (strong, atomic) NSMenu *testMenu;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    // Insert code here to initialize your applicatio
+    
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
