@@ -15,5 +15,6 @@
 
 - (instancetype) initAtPoint:(CGPoint)location;
 - (NSColor *) getCurrentColor;
+- (NSColor *) getCurrentColor:(NSTimer *)timer;
 
 @end

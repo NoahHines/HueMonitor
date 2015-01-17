@@ -31,6 +31,11 @@
     return self;
 }
 
+- (NSColor *) getCurrentColor:(NSTimer *)timer
+{
+    return [self getCurrentColor];
+}
+
 - (NSColor *) getCurrentColor
 {
     CGImageRef image = CGDisplayCreateImageForRect(self.displayID, CGRectMake(self.location.x, self.location.y, 1, 1));
