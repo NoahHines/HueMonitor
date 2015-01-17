@@ -24,6 +24,11 @@
     [super viewDidLoad];
     self.numberOfHotspots.stringValue = @"3";
     self.hotspotController = [[MMWatchPixelController alloc] init];
+    
+    /// Default color to start. "Noah's Cool Blue"
+    NSColor *myColor = [NSColor colorWithCalibratedRed:(6/255.0) green:(5/255.0) blue:(200/255.0) alpha:1.0f];
+    
+    [MMHueRequest sendColor:myColor toLights:@[@1,@2]];
 
     // Do any additional setup after loading the view.
 }
