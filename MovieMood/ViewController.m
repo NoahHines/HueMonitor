@@ -9,42 +9,22 @@
 #import "ViewController.h"
 @import AppKit;
 
+@interface ViewController ()
+@property (weak) IBOutlet NSTextField *numberOfHotspots;
+
+@end
+
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSColor *color = [self getColorFromMouseCursor];
-    NSLog(@"%f, %f, %f",color.redComponent,color.greenComponent,color.blueComponent);
-    
-    dispatch_queue_t colorQueue = dispatch_queue_create("colorQueue", DISPATCH_QUEUE_SERIAL);
-
-    dispatch_async(colorQueue, ^{
-        [self constantlyGetColor];
-    });
 
     // Do any additional setup after loading the view.
 }
-
-- (void) constantlyGetColor
-{
-    while (1) {
-        NSColor *color = [self getColorFromMouseCursor];
-        NSLog(@"%f, %f, %f",color.redComponent,color.greenComponent,color.blueComponent);
-    }
-}
-
-- (NSColor *) getColorFromMouseCursor {
-    CGPoint mousePoint = NSPointToCGPoint([NSEvent mouseLocation]);
-    mousePoint.y = [NSScreen mainScreen].frame.size.height - mousePoint.y;
-    
-    CGDirectDisplayID ids;
-    CGGetDisplaysWithPoint(mousePoint, 1, &ids, nil);
-    CGImageRef image = CGDisplayCreateImageForRect(ids, CGRectMake(mousePoint.x, mousePoint.y, 1, 1));
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
-    CGImageRelease(image);
-    NSColor *color = [bitmap colorAtX:0 y:0];
-    return color;
+- (IBAction)setHotspots:(id)sender {
+    [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask handler:^(NSEvent *event) {
+        NSLog(@"%f,%f",event.locationInWindow.x,event.locationInWindow.y);
+    }];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
