@@ -49,7 +49,7 @@
         }
         
         [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            NSLog(@"Submitted lightbulb ID #%@", currentId);
+            //NSLog(@"Submitted lightbulb ID #%@", currentId);
         }];
         
     }

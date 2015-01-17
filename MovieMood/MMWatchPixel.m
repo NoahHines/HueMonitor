@@ -11,6 +11,8 @@
 @interface MMWatchPixel ()
 
 @property CGDirectDisplayID displayID;
+@property (strong, atomic) NSColor *previousSetColor;
+@property double threshold;
 
 @end
 
@@ -26,7 +28,9 @@
         
         CGDirectDisplayID id;
         CGGetDisplaysWithPoint(location, 1, &id, nil);
-        self.displayID = id;
+        _displayID = id;
+        
+        _threshold = 0.01;
     }
     return self;
 }
@@ -42,7 +46,24 @@
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
     CGImageRelease(image);
     NSColor *color = [bitmap colorAtX:0 y:0];
+    if(!self.previousSetColor) self.previousSetColor = color;
     return color;
+}
+
+- (void) updateColor
+{
+    self.previousSetColor = [self getCurrentColor];
+}
+
+- (BOOL) shouldSendUpdate
+{
+    if((fabs(self.previousSetColor.redComponent - self.getCurrentColor.redComponent)) > self.threshold)
+        return true;
+    if((fabs(self.previousSetColor.greenComponent - self.getCurrentColor.greenComponent)) > self.threshold)
+        return true;
+    if((fabs(self.previousSetColor.blueComponent - self.getCurrentColor.blueComponent)) > self.threshold)
+        return true;
+    return false;
 }
 
 @end
