@@ -84,7 +84,6 @@
         NSColor *color = [NSColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
         [self.lightArray[i] sendColor:color];
         
-        
     }
 }
 

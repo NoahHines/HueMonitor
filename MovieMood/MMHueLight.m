@@ -93,8 +93,6 @@
     } else {
         httpBody[@"on"] = [NSNumber numberWithBool:YES];
     }
-
-    //NSLog(@"%@", httpBody);
     
     // Make sure that the above dictionary can be converted to JSON data
     if([NSJSONSerialization isValidJSONObject:httpBody])
@@ -106,7 +104,6 @@
     }
     
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        //NSLog(@"Submitted lightbulb ID #%@", currentId);
     }];
     return YES;
 }
