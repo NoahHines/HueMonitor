@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.hotspotController = [[MMWatchPixelController alloc] init];
+    self.hotspotsPerLight.stringValue = @"1";
     
     [MMHueLight getNumberOfLights:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSDictionary *lights = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];

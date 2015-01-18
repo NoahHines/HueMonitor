@@ -15,22 +15,22 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "118E81E81A6A13890081E6E5"
-               BuildableName = "MovieMood.app"
-               BlueprintName = "MovieMood"
-               ReferencedContainer = "container:MovieMood.xcodeproj">
+               BuildableName = "HueMonitor.app"
+               BlueprintName = "HueMonitor"
+               ReferencedContainer = "container:HueMonitor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "118E81FE1A6A13890081E6E5"
-               BuildableName = "MovieMoodTests.xctest"
-               BlueprintName = "MovieMoodTests"
+               BlueprintIdentifier = "118E81E81A6A13890081E6E5"
+               BuildableName = "MovieMood.app"
+               BlueprintName = "MovieMood"
                ReferencedContainer = "container:MovieMood.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,16 +42,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "118E81FE1A6A13890081E6E5"
-               BuildableName = "MovieMoodTests.xctest"
-               BlueprintName = "MovieMoodTests"
-               ReferencedContainer = "container:MovieMood.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -76,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "118E81E81A6A13890081E6E5"
-            BuildableName = "MovieMood.app"
-            BlueprintName = "MovieMood"
-            ReferencedContainer = "container:MovieMood.xcodeproj">
+            BuildableName = "HueMonitor.app"
+            BlueprintName = "HueMonitor"
+            ReferencedContainer = "container:HueMonitor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
