@@ -21,7 +21,7 @@
 - (instancetype) initAtPoint:(CGPoint)location
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         location.y = [NSScreen mainScreen].frame.size.height - location.y;
         _location = location;

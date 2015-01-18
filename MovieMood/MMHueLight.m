@@ -85,9 +85,10 @@
     httpBody[@"sat"] = [NSNumber numberWithInt:(int)inputSat];
     httpBody[@"bri"] = [NSNumber numberWithInt:(int)inputBri];
     httpBody[@"transitiontime"] = [NSNumber numberWithInt:3];
-    
-    // Turn off light if rgb values are < 0.06
-    if ([colorToSend alphaComponent] == 0) {
+
+    // If RGB < 0.06 turn off lights
+    if ((colorToSend.redComponent < 0.06) && (colorToSend.greenComponent < 0.06) && (colorToSend.blueComponent < 0.06)) {
+        NSLog(@"Good stuff.");
         httpBody[@"on"] = [NSNumber numberWithBool:NO];
     } else {
         httpBody[@"on"] = [NSNumber numberWithBool:YES];
