@@ -10,6 +10,15 @@
 
 @implementation MMHueRequest
 
++ (void) getNumberOfLights:(void (^)(NSURLResponse *response, NSData *data, NSError *connectionError))completionHandler
+{
+    NSURL *url = [NSURL URLWithString:@"http://10.0.1.2/api/newdeveloper/lights"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:completionHandler];
+}
+
 /* function sendColor
    takes an NSColor object, converts it to Hue/Saturation/Brightness values
    and sends it to the light that has the id of the second parameter (lightId)
@@ -53,6 +62,5 @@
         }];
         
     }
-    
 }
 @end

@@ -49,21 +49,19 @@
 // This gets called repeatedly by an NSTimer when monitoring
 - (void) repeatPixels:(NSTimer *) timer
 {
-    int currentPixelCounter = 0;
-    for (MMWatchPixel *pixel in self.pixelArray) {
-        if ([pixel shouldSendUpdate])
+    for(int i = 0; i < self.pixelArray.count; i++)
+    {
+        if([self.pixelArray[i] shouldSendUpdate])
         {
-            //NSLog(@"%@", [pixel getCurrentColor]);
-            [pixel updateColor];
-            [MMHueRequest sendColor:[self.pixelArray[currentPixelCounter] getCurrentColor] toLights:@[@(currentPixelCounter+1)]];
+            [self.pixelArray[i] updateColor];
+            [MMHueRequest sendColor:[self.pixelArray[i] getCurrentColor] toLights:@[[NSNumber numberWithInt:i+1]]];
         }
-        currentPixelCounter++;
     }
 }
 
 - (void) startMonitoring
 {
-    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
+    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.monitorTimer forMode:NSDefaultRunLoopMode];
 }
 

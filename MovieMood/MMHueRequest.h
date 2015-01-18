@@ -12,5 +12,6 @@
 @interface MMHueRequest : NSObject
 
 + (void)sendColor:(NSColor *)colorToSend toLights:(NSArray *)lightsArray;
++ (void) getNumberOfLights:(void (^)(NSURLResponse *response, NSData *data, NSError *connectionError))completionHandler;
 
 @end

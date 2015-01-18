@@ -15,6 +15,8 @@
 @property (weak) IBOutlet NSTextField *numberOfHotspots;
 @property (strong, atomic) MMWatchPixelController *hotspotController;
 @property (strong, atomic) id hotspotSelectionMonitor;
+@property (strong, atomic) NSMutableArray *validLights;
+@property (weak) IBOutlet NSTextField *lightsLabel;
 
 @end
 
@@ -25,10 +27,17 @@
     self.numberOfHotspots.stringValue = @"3";
     self.hotspotController = [[MMWatchPixelController alloc] init];
     
-    /// Default color to start. "Noah's Cool Blue"
-    NSColor *myColor = [NSColor colorWithCalibratedRed:(6/255.0) green:(5/255.0) blue:(200/255.0) alpha:1.0f];
-    
-    [MMHueRequest sendColor:myColor toLights:@[@1,@2]];
+    self.validLights = [[NSMutableArray alloc] init];
+    [MMHueRequest getNumberOfLights:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSDictionary *lights = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        [lights enumerateKeysAndObjectsUsingBlock:^(NSString *lightID, NSDictionary *light, BOOL *stop) {
+            if([light[@"state"][@"reachable"] boolValue])
+            {
+                [self.validLights addObject:[NSNumber numberWithInteger:lightID.integerValue ]];
+                self.lightsLabel.stringValue = [NSString stringWithFormat:@"%lu lights found", self.validLights.count];
+            }
+        }];
+    }];
 
     // Do any additional setup after loading the view.
 }
