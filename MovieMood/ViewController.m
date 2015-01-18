@@ -45,7 +45,7 @@
     [self.view.window orderOut:nil];
     
     self.hotspotSelectionMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask handler:^(NSEvent *event) {
-        NSLog(@"%f,%f",event.locationInWindow.x,event.locationInWindow.y);
+        //NSLog(@"%f,%f",event.locationInWindow.x,event.locationInWindow.y);
         [self.hotspotController addPixelAtEvent:event];
         if([self.hotspotController pixelCount] == self.validLights.count)
         {

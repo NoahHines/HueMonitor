@@ -45,8 +45,9 @@
         httpBody[@"hue"] = [NSNumber numberWithInt:(int)inputHue];
         httpBody[@"sat"] = [NSNumber numberWithInt:(int)inputSat];
         httpBody[@"bri"] = [NSNumber numberWithInt:(int)inputBri];
+        httpBody[@"transitiontime"] = [NSNumber numberWithInt:3];
         
-        NSLog(@"%@", httpBody);
+        //NSLog(@"%@", httpBody);
         
         // Make sure that the above dictionary can be converted to JSON data
         if([NSJSONSerialization isValidJSONObject:httpBody])
