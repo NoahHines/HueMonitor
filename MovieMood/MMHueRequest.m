@@ -47,7 +47,12 @@
         httpBody[@"bri"] = [NSNumber numberWithInt:(int)inputBri];
         httpBody[@"transitiontime"] = [NSNumber numberWithInt:3];
         
-        //NSLog(@"%@", httpBody);
+        /// Turn off lights if brightness is less than 0.2
+        if ([colorToSend alphaComponent] == 0) {
+            httpBody[@"on"] = [NSNumber numberWithBool:NO];
+        } else {
+            httpBody[@"on"] = [NSNumber numberWithBool:YES];
+        }
         
         // Make sure that the above dictionary can be converted to JSON data
         if([NSJSONSerialization isValidJSONObject:httpBody])
