@@ -13,6 +13,8 @@
 @property CGDirectDisplayID displayID;
 @property int squareLength;
 @property int pixelPerWidth;
+@property (strong, atomic) NSColor *previousSetColor;
+@property double threshold;
 
 @end
 
@@ -30,7 +32,9 @@
         
         CGDirectDisplayID id;
         CGGetDisplaysWithPoint(location, 1, &id, nil);
-        self.displayID = id;
+        _displayID = id;
+        
+        _threshold = 0.01;
     }
     return self;
 }
@@ -64,9 +68,24 @@
     currBri /= pow(dividend, 2);
     
     NSColor *color = [NSColor colorWithCalibratedHue:currHue saturation:currSat brightness:currBri alpha:1.0];
+    if(!self.previousSetColor) self.previousSetColor = color;
     return color;
 }
 
+- (void) updateColor
+{
+    self.previousSetColor = [self getCurrentColor];
+}
 
+- (BOOL) shouldSendUpdate
+{
+    if((fabs(self.previousSetColor.redComponent - self.getCurrentColor.redComponent)) > self.threshold)
+        return true;
+    if((fabs(self.previousSetColor.greenComponent - self.getCurrentColor.greenComponent)) > self.threshold)
+        return true;
+    if((fabs(self.previousSetColor.blueComponent - self.getCurrentColor.blueComponent)) > self.threshold)
+        return true;
+    return false;
+}
 
 @end

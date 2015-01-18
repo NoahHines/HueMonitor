@@ -51,15 +51,19 @@
 {
     int currentPixelCounter = 0;
     for (MMWatchPixel *pixel in self.pixelArray) {
-        NSLog(@"%@", [pixel getCurrentColor]);
-        [MMHueRequest sendColor:[self.pixelArray[currentPixelCounter] getCurrentColor] toLights:@[@(currentPixelCounter+1)]];
+        if ([pixel shouldSendUpdate])
+        {
+            //NSLog(@"%@", [pixel getCurrentColor]);
+            [pixel updateColor];
+            [MMHueRequest sendColor:[self.pixelArray[currentPixelCounter] getCurrentColor] toLights:@[@(currentPixelCounter+1)]];
+        }
         currentPixelCounter++;
     }
 }
 
 - (void) startMonitoring
 {
-    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
+    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.monitorTimer forMode:NSDefaultRunLoopMode];
 }
 
