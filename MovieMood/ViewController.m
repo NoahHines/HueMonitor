@@ -12,10 +12,11 @@
 @import AppKit;
 
 @interface ViewController ()
-@property (strong, atomic) MMWatchPixelController *hotspotController;
-@property (strong, atomic) id hotspotSelectionMonitor;              // Used to record
-@property (strong, atomic) NSMutableArray *validLights;
 @property (weak) IBOutlet NSTextField *lightsLabel;
+
+@property (strong, atomic) id hotspotSelectionMonitor;              // Used to remember the NSEvent global monitor
+@property (strong, atomic) MMWatchPixelController *hotspotController;
+@property (strong, atomic) NSMutableArray *validLights;             // Keeps track of a list of valid lights
 
 @end
 

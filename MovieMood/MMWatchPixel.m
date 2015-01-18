@@ -13,8 +13,8 @@
 @property CGDirectDisplayID displayID;
 @property int squareLength;
 @property int pixelPerWidth;
-@property (strong, atomic) NSColor *previousSetColor;
 @property double threshold;
+@property (strong, atomic) NSColor *previousSetColor;
 @property (strong, atomic) NSMutableArray *lastUpdates;
 
 @end
@@ -41,16 +41,15 @@
     return self;
 }
 
-- (NSColor *) getCurrentColor:(NSTimer *)timer
+- (void) updateCurrentColor
 {
-    return [self getCurrentColor];
-}
-
-- (NSColor *) getCurrentColor
-{
-    NSMutableArray *colors = [NSMutableArray array];
+    NSMutableArray *colors = [[NSMutableArray alloc] init];
     
-    CGImageRef image = CGDisplayCreateImageForRect(self.displayID, CGRectMake(self.location.x - self.squareLength/2, self.location.y - self.squareLength/2, self.squareLength, self.squareLength));
+    CGRect captureLocation = CGRectMake(self.location.x - self.squareLength/2,
+                                        self.location.y - self.squareLength/2,
+                                        self.squareLength, self.squareLength);
+    
+    CGImageRef image = CGDisplayCreateImageForRect(self.displayID, captureLocation);
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
     CGImageRelease(image);
 
@@ -81,12 +80,12 @@
         color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent*2 brightness:color.brightnessComponent alpha:1];
     }
     if(!self.previousSetColor) self.previousSetColor = color;
-    return color;
+    self.currentColor = color;
 }
 
-- (void) updateColor
+- (void) hasSentColor
 {
-    self.previousSetColor = [self getCurrentColor];
+    self.previousSetColor = self.currentColor;
     [self.lastUpdates addObject:[[NSDate alloc] init]];
     if(self.lastUpdates.count > 20) [self.lastUpdates removeObjectAtIndex:0];
 }
@@ -106,11 +105,11 @@
         if(totalTimeInterval > -0.75) return false;
     }
     
-    if((fabs(self.previousSetColor.redComponent - self.getCurrentColor.redComponent)) > self.threshold)
+    if((fabs(self.previousSetColor.redComponent - self.currentColor.redComponent)) > self.threshold)
         return true;
-    if((fabs(self.previousSetColor.greenComponent - self.getCurrentColor.greenComponent)) > self.threshold)
+    if((fabs(self.previousSetColor.greenComponent - self.currentColor.greenComponent)) > self.threshold)
         return true;
-    if((fabs(self.previousSetColor.blueComponent - self.getCurrentColor.blueComponent)) > self.threshold)
+    if((fabs(self.previousSetColor.blueComponent - self.currentColor.blueComponent)) > self.threshold)
         return true;
     return false;
 }
