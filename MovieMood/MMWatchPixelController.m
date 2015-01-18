@@ -65,10 +65,23 @@
             }
             return false;
         }];
+        CGFloat hue = [pixelArray[pixelArray.count/2] hueComponent];
+        [pixelArray sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
+            if (obj1.saturationComponent > obj2.saturationComponent) {
+                return true;
+            }
+            return false;
+        }];
+        CGFloat saturation = [pixelArray[pixelArray.count/2] saturationComponent];
+        [pixelArray sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
+            if (obj1.brightnessComponent > obj2.brightnessComponent) {
+                return true;
+            }
+            return false;
+        }];
+        CGFloat brightness = [pixelArray[pixelArray.count/2] brightnessComponent];
         
-        NSColor *color = pixelArray[pixelArray.count/2];
-        
-        
+        NSColor *color = [NSColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
         [self.lightArray[i] sendColor:color];
         
         
