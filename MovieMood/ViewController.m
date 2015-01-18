@@ -12,9 +12,8 @@
 @import AppKit;
 
 @interface ViewController ()
-@property (weak) IBOutlet NSTextField *numberOfHotspots;
 @property (strong, atomic) MMWatchPixelController *hotspotController;
-@property (strong, atomic) id hotspotSelectionMonitor;
+@property (strong, atomic) id hotspotSelectionMonitor;              // Used to record
 @property (strong, atomic) NSMutableArray *validLights;
 @property (weak) IBOutlet NSTextField *lightsLabel;
 
@@ -24,7 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.numberOfHotspots.stringValue = @"3";
     self.hotspotController = [[MMWatchPixelController alloc] init];
     
     self.validLights = [[NSMutableArray alloc] init];
@@ -53,7 +51,6 @@
         {
             [NSEvent removeMonitor:self.hotspotSelectionMonitor];
             [self.view.window orderFrontRegardless];
-            self.numberOfHotspots.editable = YES;
         }
     }];
 }
