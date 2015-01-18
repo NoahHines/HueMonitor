@@ -15,6 +15,7 @@
 @property int pixelPerWidth;
 @property (strong, atomic) NSColor *previousSetColor;
 @property double threshold;
+@property (strong, atomic) NSMutableArray *lastUpdates;
 
 @end
 
@@ -34,6 +35,7 @@
         CGGetDisplaysWithPoint(location, 1, &id, nil);
         _displayID = id;
         
+        _lastUpdates = [[NSMutableArray alloc] init];
         _threshold = 0.05;
     }
     return self;
@@ -81,10 +83,25 @@
 - (void) updateColor
 {
     self.previousSetColor = [self getCurrentColor];
+    [self.lastUpdates addObject:[[NSDate alloc] init]];
+    if(self.lastUpdates.count > 20) [self.lastUpdates removeObjectAtIndex:0];
 }
 
 - (BOOL) shouldSendUpdate
 {
+    if(self.lastUpdates.count > 0)
+    {
+        NSTimeInterval totalTimeInterval = 0;
+        for(int i = 1; i < self.lastUpdates.count; i++)
+        {
+            totalTimeInterval += [self.lastUpdates[i-1] timeIntervalSinceDate:self.lastUpdates[i]];
+        }
+        totalTimeInterval += [self.lastUpdates.lastObject timeIntervalSinceNow];
+        totalTimeInterval /= self.lastUpdates.count;
+        NSLog(@"%f", totalTimeInterval);
+        if(totalTimeInterval > -0.75) return false;
+    }
+    
     if((fabs(self.previousSetColor.redComponent - self.getCurrentColor.redComponent)) > self.threshold)
         return true;
     if((fabs(self.previousSetColor.greenComponent - self.getCurrentColor.greenComponent)) > self.threshold)
