@@ -25,8 +25,8 @@
     {
         location.y = [NSScreen mainScreen].frame.size.height - location.y;
         _location = location;
-        _squareLength = 20;
-        _pixelPerWidth = 1;
+        _squareLength = 10;
+        _pixelPerWidth = 2;
         
         CGDirectDisplayID id;
         CGGetDisplaysWithPoint(location, 1, &id, nil);
@@ -52,7 +52,29 @@
             [colors addObject:[bitmap colorAtX:i y:j]];
         }
     }
-    return colors;
+
+    [colors sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
+        if (obj1.hueComponent > obj2.hueComponent) {
+            return true;
+        }
+        return false;
+    }];
+    
+    NSColor *color = colors[colors.count/2];
+    
+    // Check if color is black
+    if (color.brightnessComponent < 0.18) {
+        // If it is, return 0's so we can set "on" to false
+        color = [NSColor colorWithCalibratedHue:0 saturation:0 brightness:0 alpha:0];
+    }
+    if (color.saturationComponent < 0.2) {
+        color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
+        
+    } else {
+        color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent*2 brightness:color.brightnessComponent alpha:1];
+    }
+    if(!self.previousSetColor) self.previousSetColor = color;
+    self.currentColor = color;
 }
 
 @end
