@@ -48,7 +48,8 @@
         httpBody[@"transitiontime"] = [NSNumber numberWithInt:3];
         
         /// Turn off lights if brightness is less than 0.2
-        if ([colorToSend alphaComponent] == 0) {
+        if ((colorToSend.redComponent < 0.06) && (colorToSend.greenComponent < 0.06) && (colorToSend.blueComponent < 0.06)) {
+            NSLog(@"Good stuff.");
             httpBody[@"on"] = [NSNumber numberWithBool:NO];
         } else {
             httpBody[@"on"] = [NSNumber numberWithBool:YES];
