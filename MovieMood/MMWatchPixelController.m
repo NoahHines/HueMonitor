@@ -68,9 +68,7 @@
         
         NSColor *color = pixelArray[pixelArray.count/2];
         
-        
         [self.lightArray[i] sendColor:color];
-        
         
     }
 }
