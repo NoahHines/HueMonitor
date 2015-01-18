@@ -13,6 +13,7 @@
 
 @property (strong, atomic) NSMutableArray *lightArray;
 @property int pixelsPerLight;
+@property BOOL coyoteMode;
 
 - (instancetype) init;
 - (NSUInteger) pixelCount;

@@ -42,7 +42,7 @@
 }
 
 - (IBAction)setHotspots:(id)sender {
-    self.hotspotController.pixelsPerLight = self.hotspotsPerLight.stringValue.integerValue;
+    self.hotspotController.pixelsPerLight = (int)self.hotspotsPerLight.stringValue.integerValue;
     [self.hotspotController emptyPixelArray];
     // Hide window for hotspot selection
     [self.view.window orderOut:nil];
@@ -67,6 +67,18 @@
     {
         sender.title = @"Start Monitoring";
         [self.hotspotController stopMonitoring];
+    }
+}
+- (IBAction)toggleCoyoteMode:(NSButton *)sender {
+    if([sender.title isEqualToString:@"Coyote Mode: Off"])
+    {
+        sender.title = @"Coyote Mode: On";
+        self.hotspotController.coyoteMode = YES;
+    }
+    else
+    {
+        sender.title = @"Coyote Mode: Off";
+        self.hotspotController.coyoteMode = NO;
     }
 }
 

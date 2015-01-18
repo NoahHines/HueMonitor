@@ -683,6 +683,14 @@
                                     <action selector="setHotspots:" target="XfG-lQ-9wD" id="jPc-dg-uIf"/>
                                 </connections>
                             </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z5d-Ws-GSv">
+                                <rect key="frame" x="196" y="292" width="88" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="0 lights found" id="J54-Zn-Jif">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nDt-do-hW9">
                                 <rect key="frame" x="170" y="127" width="140" height="32"/>
                                 <buttonCell key="cell" type="push" title="Start Monitoring" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9CP-s9-nTn">
@@ -712,21 +720,25 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z5d-Ws-GSv">
-                                <rect key="frame" x="196" y="292" width="88" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="0 lights found" id="J54-Zn-Jif">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n1k-j6-Fwm">
+                                <rect key="frame" x="165" y="77" width="150" height="32"/>
+                                <buttonCell key="cell" type="push" title="Coyote Mode: Off" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iwx-oP-hVH">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="toggleCoyoteMode:" target="XfG-lQ-9wD" id="9c6-RN-3nO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ujE-3U-P5F" firstAttribute="top" secondItem="3Nb-Ce-h2j" secondAttribute="bottom" constant="31" id="5Yh-GI-Eyx"/>
                             <constraint firstAttribute="centerX" secondItem="Z5d-Ws-GSv" secondAttribute="centerX" id="Apk-FC-wmE"/>
                             <constraint firstItem="3Nb-Ce-h2j" firstAttribute="leading" secondItem="QxH-iQ-mqZ" secondAttribute="trailing" constant="8" id="Dbe-8O-3UL"/>
                             <constraint firstItem="Z5d-Ws-GSv" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="40" id="K3H-uA-wkr"/>
+                            <constraint firstAttribute="centerX" secondItem="n1k-j6-Fwm" secondAttribute="centerX" id="N7Z-vY-q6Z"/>
                             <constraint firstAttribute="centerX" secondItem="ujE-3U-P5F" secondAttribute="centerX" id="WPS-zm-GN9"/>
+                            <constraint firstItem="n1k-j6-Fwm" firstAttribute="top" secondItem="nDt-do-hW9" secondAttribute="bottom" constant="29" id="XA0-IN-BHq"/>
                             <constraint firstItem="nDt-do-hW9" firstAttribute="top" secondItem="ujE-3U-P5F" secondAttribute="bottom" constant="34" id="aFU-GI-gYa"/>
                             <constraint firstAttribute="centerX" secondItem="nDt-do-hW9" secondAttribute="centerX" id="imI-4P-Jjw"/>
                             <constraint firstItem="3Nb-Ce-h2j" firstAttribute="top" secondItem="Z5d-Ws-GSv" secondAttribute="bottom" constant="34" id="jhu-gi-HOt"/>
