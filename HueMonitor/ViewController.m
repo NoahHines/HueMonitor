@@ -43,7 +43,7 @@
                     MMHueLight *lastLight = self.hotspotController.lightArray.lastObject;
                     lightWell = [[NSColorWell alloc] initWithFrame:NSMakeRect(self.lightWellHolder.frame.origin.x + 10, lastLight.colorWell.frame.origin.y-23-15, 44, 23)];
                 }
-                [lightWell deactivate];
+                lightWell.enabled = NO;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.view addSubview:lightWell];
                 });
