@@ -27,6 +27,7 @@
         _pixelArray = [[NSMutableArray alloc] init];
         _lightArray = [[NSMutableArray alloc] init];
         _pixelsPerLight = 3;
+        _coyoteMode = NO;
     }
     return self;
 }
@@ -65,14 +66,14 @@
             }
             return false;
         }];
-        CGFloat hue = [pixelArray[pixelArray.count/2] hueComponent];
+        CGFloat hue = self.coyoteMode ? 112 : [pixelArray[pixelArray.count/2] hueComponent];
         [pixelArray sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
             if (obj1.saturationComponent > obj2.saturationComponent) {
                 return true;
             }
             return false;
         }];
-        CGFloat saturation = [pixelArray[pixelArray.count/2] saturationComponent];
+        CGFloat saturation = self.coyoteMode ? 86 : [pixelArray[pixelArray.count/2] saturationComponent];
         [pixelArray sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
             if (obj1.brightnessComponent > obj2.brightnessComponent) {
                 return true;
