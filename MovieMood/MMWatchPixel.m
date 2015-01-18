@@ -28,7 +28,7 @@
         location.y = [NSScreen mainScreen].frame.size.height - location.y;
         _location = location;
         _squareLength = 20;
-        _pixelPerWidth = 5;
+        _pixelPerWidth = 1;
         
         CGDirectDisplayID id;
         CGGetDisplaysWithPoint(location, 1, &id, nil);
@@ -46,27 +46,27 @@
 
 - (NSColor *) getCurrentColor
 {
-    CGImageRef image = CGDisplayCreateImageForRect(self.displayID, CGRectMake(self.location.x - self.squareLength/2, self.location.y - self.squareLength/2, self.squareLength/2, self.squareLength/2));
+    NSMutableArray *colors = [NSMutableArray array];
+    
+    CGImageRef image = CGDisplayCreateImageForRect(self.displayID, CGRectMake(self.location.x - self.squareLength/2, self.location.y - self.squareLength/2, self.squareLength, self.squareLength));
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
     CGImageRelease(image);
-    
-    double currRed = 0;
-    double currGreen = 0;
-    double currBlue = 0;
-    for (int i = -1*self.squareLength/2; i <= self.squareLength/2; i+=self.pixelPerWidth) {
-        for (int j = self.squareLength/2; j >= -1*self.squareLength/2; j-=self.pixelPerWidth) {
-            currRed += [[bitmap colorAtX:i y:j] redComponent];
-            currGreen += [[bitmap colorAtX:i y:j] greenComponent];
-            currBlue += [[bitmap colorAtX:i y:j] blueComponent];
+
+    for (int i = 0; i <= self.squareLength; i+=self.pixelPerWidth) {
+        for (int j = 0; j <= self.squareLength; j+=self.pixelPerWidth) {
+            [colors addObject:[bitmap colorAtX:i y:j]];
         }
     }
-    int dividend = self.squareLength/(self.pixelPerWidth) + 1;
-    currRed /= pow(dividend, 2);
-    currGreen /= pow(dividend, 2);
-    currBlue /= pow(dividend, 2);
     
+
+    [colors sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
+        if (obj1.hueComponent > obj2.hueComponent) {
+            return true;
+        }
+        return false;
+    }];
     
-    NSColor *color = [NSColor colorWithCalibratedRed:currRed green:currGreen blue:currBlue alpha:1.0];
+    NSColor *color = colors[colors.count/2];
     
     if (color.saturationComponent < 0.2) {
         color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
