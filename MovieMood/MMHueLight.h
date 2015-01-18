@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 @import AppKit;
 
-@interface MMHueRequest : NSObject
+@interface MMHueLight : NSObject
 
-+ (void) sendColor:(NSColor *)colorToSend toLights:(NSArray *)lightsArray;
+- (instancetype) initWithID:(NSNumber *)id;
+- (BOOL) sendColor:(NSColor *)colorToSend;
 + (void) getNumberOfLights:(void (^)(NSURLResponse *response, NSData *data, NSError *connectionError))completionHandler;
 
 @end

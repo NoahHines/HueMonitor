@@ -8,7 +8,7 @@
 
 #import "MMWatchPixelController.h"
 #import "MMWatchPixel.h"
-#import "MMHueRequest.h"
+#import "MMHueLight.h"
 
 @interface MMWatchPixelController ()
 
@@ -24,7 +24,9 @@
     self = [super init];
     if(self)
     {
-        self.pixelArray = [[NSMutableArray alloc] init];
+        _pixelArray = [[NSMutableArray alloc] init];
+        _lightArray = [[NSMutableArray alloc] init];
+        _pixelsPerLight = 3;
     }
     return self;
 }
@@ -49,17 +51,31 @@
 // This gets called repeatedly by an NSTimer when monitoring
 - (void) repeatPixels:(NSTimer *) timer
 {
-    for(int i = 0; i < self.pixelArray.count; i++)
+    for(int i = 0; i < self.lightArray.count; i++)
     {
-        [self.pixelArray[i] updateCurrentColor];
-        if([self.pixelArray[i] shouldSendUpdate])
-            [MMHueRequest sendColor:[self.pixelArray[i] currentColor] toLights:@[[NSNumber numberWithInt:i+1]]];
+        NSArray *lightHotspots = [self.pixelArray subarrayWithRange:NSMakeRange(i*self.pixelsPerLight, self.pixelsPerLight)];
+        NSMutableArray *pixelArray = [[NSMutableArray alloc] init];
+        for (MMWatchPixel *pixel in lightHotspots) {
+            [pixelArray addObjectsFromArray:[pixel getPixelArray]];
+        }
+        
+        [pixelArray sortUsingComparator:^NSComparisonResult(NSColor *obj1, NSColor *obj2) {
+            if (obj1.hueComponent > obj2.hueComponent) {
+                return true;
+            }
+            return false;
+        }];
+        
+        NSColor *color = pixelArray[pixelArray.count/2];
+        
+        color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
+        [self.lightArray[i] sendColor:color];
     }
 }
 
 - (void) startMonitoring
 {
-    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
+    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.monitorTimer forMode:NSDefaultRunLoopMode];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "MMHueRequest.h"
+#import "MMHueLight.h"
 #import "MMWatchPixelController.h"
 @import AppKit;
 
@@ -16,7 +16,6 @@
 
 @property (strong, atomic) id hotspotSelectionMonitor;              // Used to remember the NSEvent global monitor
 @property (strong, atomic) MMWatchPixelController *hotspotController;
-@property (strong, atomic) NSMutableArray *validLights;             // Keeps track of a list of valid lights
 
 @end
 
@@ -26,14 +25,14 @@
     [super viewDidLoad];
     self.hotspotController = [[MMWatchPixelController alloc] init];
     
-    self.validLights = [[NSMutableArray alloc] init];
-    [MMHueRequest getNumberOfLights:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    [MMHueLight getNumberOfLights:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSDictionary *lights = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
         [lights enumerateKeysAndObjectsUsingBlock:^(NSString *lightID, NSDictionary *light, BOOL *stop) {
             if([light[@"state"][@"reachable"] boolValue])
             {
-                [self.validLights addObject:[NSNumber numberWithInteger:lightID.integerValue ]];
-                self.lightsLabel.stringValue = [NSString stringWithFormat:@"%lu lights found", self.validLights.count];
+                NSNumber *idNumber = [NSNumber numberWithInteger:lightID.integerValue];
+                [self.hotspotController.lightArray addObject:[[MMHueLight alloc] initWithID:idNumber]];
+                self.lightsLabel.stringValue = [NSString stringWithFormat:@"%lu lights found", self.hotspotController.lightArray.count];
             }
         }];
     }];
@@ -48,7 +47,7 @@
     self.hotspotSelectionMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask handler:^(NSEvent *event) {
         //NSLog(@"%f,%f",event.locationInWindow.x,event.locationInWindow.y);
         [self.hotspotController addPixelAtEvent:event];
-        if([self.hotspotController pixelCount] == self.validLights.count)
+        if([self.hotspotController pixelCount] == self.hotspotController.lightArray.count * self.hotspotController.pixelsPerLight)
         {
             [NSEvent removeMonitor:self.hotspotSelectionMonitor];
             [self.view.window orderFrontRegardless];

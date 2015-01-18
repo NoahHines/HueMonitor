@@ -15,7 +15,7 @@
 		118E82061A6A13890081E6E5 /* MovieMoodTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E82051A6A13890081E6E5 /* MovieMoodTests.m */; };
 		118E82451A6A42D70081E6E5 /* MMWatchPixel.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E82441A6A42D70081E6E5 /* MMWatchPixel.m */; };
 		118E82481A6A71330081E6E5 /* MMWatchPixelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E82471A6A71330081E6E5 /* MMWatchPixelController.m */; };
-		118E824E1A6B0F0E0081E6E5 /* MMHueRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E824D1A6B0F0E0081E6E5 /* MMHueRequest.m */; };
+		118E824E1A6B0F0E0081E6E5 /* MMHueLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 118E824D1A6B0F0E0081E6E5 /* MMHueLight.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +45,8 @@
 		118E82441A6A42D70081E6E5 /* MMWatchPixel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWatchPixel.m; sourceTree = "<group>"; };
 		118E82461A6A71330081E6E5 /* MMWatchPixelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMWatchPixelController.h; sourceTree = "<group>"; };
 		118E82471A6A71330081E6E5 /* MMWatchPixelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMWatchPixelController.m; sourceTree = "<group>"; };
-		118E824C1A6B0F0E0081E6E5 /* MMHueRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHueRequest.h; sourceTree = "<group>"; };
-		118E824D1A6B0F0E0081E6E5 /* MMHueRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHueRequest.m; sourceTree = "<group>"; };
+		118E824C1A6B0F0E0081E6E5 /* MMHueLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHueLight.h; sourceTree = "<group>"; };
+		118E824D1A6B0F0E0081E6E5 /* MMHueLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHueLight.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +88,8 @@
 		118E81EB1A6A13890081E6E5 /* MovieMood */ = {
 			isa = PBXGroup;
 			children = (
-				118E824C1A6B0F0E0081E6E5 /* MMHueRequest.h */,
-				118E824D1A6B0F0E0081E6E5 /* MMHueRequest.m */,
+				118E824C1A6B0F0E0081E6E5 /* MMHueLight.h */,
+				118E824D1A6B0F0E0081E6E5 /* MMHueLight.m */,
 				118E81EE1A6A13890081E6E5 /* AppDelegate.h */,
 				118E81EF1A6A13890081E6E5 /* AppDelegate.m */,
 				118E81F31A6A13890081E6E5 /* ViewController.h */,
@@ -235,7 +235,7 @@
 				118E82481A6A71330081E6E5 /* MMWatchPixelController.m in Sources */,
 				118E81F01A6A13890081E6E5 /* AppDelegate.m in Sources */,
 				118E82451A6A42D70081E6E5 /* MMWatchPixel.m in Sources */,
-				118E824E1A6B0F0E0081E6E5 /* MMHueRequest.m in Sources */,
+				118E824E1A6B0F0E0081E6E5 /* MMHueLight.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

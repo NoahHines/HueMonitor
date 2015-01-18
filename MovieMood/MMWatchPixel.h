@@ -12,11 +12,8 @@
 @interface MMWatchPixel : NSObject
 
 @property (readonly) CGPoint location;
-@property (strong, atomic) NSColor *currentColor;
 
 - (instancetype) initAtPoint:(CGPoint)location;
-- (void) updateCurrentColor;
-- (BOOL) shouldSendUpdate;
-- (void) hasSentColor;
+- (NSArray *) getPixelArray;
 
 @end

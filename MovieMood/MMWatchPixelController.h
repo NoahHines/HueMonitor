@@ -11,6 +11,9 @@
 
 @interface MMWatchPixelController : NSObject
 
+@property (strong, atomic) NSMutableArray *lightArray;
+@property int pixelsPerLight;
+
 - (instancetype) init;
 - (NSUInteger) pixelCount;
 - (void) addPixelAtEvent:(NSEvent *)event;
