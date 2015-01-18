@@ -28,13 +28,13 @@
         location.y = [NSScreen mainScreen].frame.size.height - location.y;
         _location = location;
         _squareLength = 20;
-        _pixelPerWidth = 10;
+        _pixelPerWidth = 5;
         
         CGDirectDisplayID id;
         CGGetDisplaysWithPoint(location, 1, &id, nil);
         _displayID = id;
         
-        _threshold = 0.01;
+        _threshold = 0.05;
     }
     return self;
 }
@@ -50,24 +50,30 @@
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:image];
     CGImageRelease(image);
     
-    int currHue = 0;
-    int currSat = 0;
-    int currBri = 0;
+    double currRed = 0;
+    double currGreen = 0;
+    double currBlue = 0;
     for (int i = -1*self.squareLength/2; i <= self.squareLength/2; i+=self.pixelPerWidth) {
         for (int j = self.squareLength/2; j >= -1*self.squareLength/2; j-=self.pixelPerWidth) {
-            currHue += [[bitmap colorAtX:i y:j] hueComponent]*65280.0;
-            currSat += [[bitmap colorAtX:i y:j] saturationComponent]*255.0;
-            currBri += [[bitmap colorAtX:i y:j] brightnessComponent]*255.0;
-            
-            NSLog(@"Here is the currBri: %i", currBri);
+            currRed += [[bitmap colorAtX:i y:j] redComponent];
+            currGreen += [[bitmap colorAtX:i y:j] greenComponent];
+            currBlue += [[bitmap colorAtX:i y:j] blueComponent];
         }
     }
     int dividend = self.squareLength/(self.pixelPerWidth) + 1;
-    currHue /= pow(dividend, 2);
-    currSat /= pow(dividend, 2);
-    currBri /= pow(dividend, 2);
+    currRed /= pow(dividend, 2);
+    currGreen /= pow(dividend, 2);
+    currBlue /= pow(dividend, 2);
     
-    NSColor *color = [NSColor colorWithCalibratedHue:currHue saturation:currSat brightness:currBri alpha:1.0];
+    
+    NSColor *color = [NSColor colorWithCalibratedRed:currRed green:currGreen blue:currBlue alpha:1.0];
+    
+    if (color.saturationComponent < 0.2) {
+        color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
+        
+    } else {
+        color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent*2 brightness:color.brightnessComponent alpha:1];
+    }
     if(!self.previousSetColor) self.previousSetColor = color;
     return color;
 }

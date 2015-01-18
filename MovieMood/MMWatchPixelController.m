@@ -61,7 +61,7 @@
 
 - (void) startMonitoring
 {
-    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
+    self.monitorTimer = [NSTimer scheduledTimerWithTimeInterval:.20 target:self selector:@selector(repeatPixels:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.monitorTimer forMode:NSDefaultRunLoopMode];
 }
 
