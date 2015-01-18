@@ -11,6 +11,8 @@
 
 @interface MMHueLight : NSObject
 
+@property (strong, atomic) NSColorWell *colorWell;
+
 - (instancetype) initWithID:(NSNumber *)id;
 - (BOOL) sendColor:(NSColor *)colorToSend;
 + (void) getNumberOfLights:(void (^)(NSURLResponse *response, NSData *data, NSError *connectionError))completionHandler;

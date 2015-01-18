@@ -17,6 +17,7 @@
 @property (strong, atomic) id hotspotSelectionMonitor;              // Used to remember the NSEvent global monitor
 @property (strong, atomic) MMWatchPixelController *hotspotController;
 @property (weak) IBOutlet NSTextField *hotspotsPerLight;
+@property (weak) IBOutlet NSBox *lightWellHolder;
 
 @end
 
@@ -32,7 +33,23 @@
             if([light[@"state"][@"reachable"] boolValue])
             {
                 NSNumber *idNumber = [NSNumber numberWithInteger:lightID.integerValue];
-                [self.hotspotController.lightArray addObject:[[MMHueLight alloc] initWithID:idNumber]];
+                MMHueLight *newLight = [[MMHueLight alloc] initWithID:idNumber];
+                NSColorWell *lightWell;
+                if (self.hotspotController.lightArray.count == 0) {
+                    lightWell = [[NSColorWell alloc] initWithFrame:NSMakeRect(self.lightWellHolder.frame.origin.x + 10, self.lightWellHolder.frame.origin.y+self.lightWellHolder.frame.size.height-20-23, 44, 23)];
+                }
+                else
+                {
+                    MMHueLight *lastLight = self.hotspotController.lightArray.lastObject;
+                    lightWell = [[NSColorWell alloc] initWithFrame:NSMakeRect(self.lightWellHolder.frame.origin.x + 10, lastLight.colorWell.frame.origin.y-23-15, 44, 23)];
+                }
+                [lightWell deactivate];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.view addSubview:lightWell];
+                });
+                NSLog(@"%@",lightWell);
+                newLight.colorWell = lightWell;
+                [self.hotspotController.lightArray addObject:newLight];
                 self.lightsLabel.stringValue = [NSString stringWithFormat:@"%lu lights found", self.hotspotController.lightArray.count];
             }
         }];

@@ -90,8 +90,10 @@
     if ((colorToSend.redComponent < 0.06) && (colorToSend.greenComponent < 0.06) && (colorToSend.blueComponent < 0.06)) {
         NSLog(@"Good stuff.");
         httpBody[@"on"] = [NSNumber numberWithBool:NO];
+        self.colorWell.color = [NSColor blackColor];
     } else {
         httpBody[@"on"] = [NSNumber numberWithBool:YES];
+        self.colorWell.color = colorToSend;
     }
     
     // Make sure that the above dictionary can be converted to JSON data
