@@ -27,7 +27,7 @@
     {
         _lightID = id;
         _lastUpdates = [[NSMutableArray alloc] init];
-        _threshold = 0.05;
+        _threshold = 0.03;
     }
     return self;
 }

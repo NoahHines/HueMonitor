@@ -1,6 +1,6 @@
 //
-//  MovieMoodTests.m
-//  MovieMoodTests
+//  HueMonitorTests
+//  HueMonitorTests
 //
 //  Created by Mark Linington on 1/16/15.
 //  Copyright (c) 2015 TeamHackers. All rights reserved.
@@ -9,11 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
 
-@interface MovieMoodTests : XCTestCase
+@interface HueMonitorTests : XCTestCase
 
 @end
 
-@implementation MovieMoodTests
+@implementation HueMonitorTests
 
 - (void)setUp {
     [super setUp];
