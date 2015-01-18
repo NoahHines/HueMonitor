@@ -16,6 +16,7 @@
 
 @property (strong, atomic) id hotspotSelectionMonitor;              // Used to remember the NSEvent global monitor
 @property (strong, atomic) MMWatchPixelController *hotspotController;
+@property (weak) IBOutlet NSTextField *hotspotsPerLight;
 
 @end
 
@@ -39,7 +40,9 @@
 
     // Do any additional setup after loading the view.
 }
+
 - (IBAction)setHotspots:(id)sender {
+    self.hotspotController.pixelsPerLight = self.hotspotsPerLight.stringValue.integerValue;
     [self.hotspotController emptyPixelArray];
     // Hide window for hotspot selection
     [self.view.window orderOut:nil];
