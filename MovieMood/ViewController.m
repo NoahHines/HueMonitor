@@ -42,12 +42,6 @@
     // Do any additional setup after loading the view.
 }
 - (IBAction)setHotspots:(id)sender {
-    if(self.numberOfHotspots.stringValue.integerValue == 0)
-    {
-        // Not a valid number of hotspots maybe?
-        return;
-    }
-    self.numberOfHotspots.editable = NO;
     [self.hotspotController emptyPixelArray];
     // Hide window for hotspot selection
     [self.view.window orderOut:nil];
@@ -55,7 +49,7 @@
     self.hotspotSelectionMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:NSLeftMouseDownMask handler:^(NSEvent *event) {
         NSLog(@"%f,%f",event.locationInWindow.x,event.locationInWindow.y);
         [self.hotspotController addPixelAtEvent:event];
-        if([self.hotspotController pixelCount] == self.numberOfHotspots.stringValue.integerValue)
+        if([self.hotspotController pixelCount] == self.validLights.count)
         {
             [NSEvent removeMonitor:self.hotspotSelectionMonitor];
             [self.view.window orderFrontRegardless];
