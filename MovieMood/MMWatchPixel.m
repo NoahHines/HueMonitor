@@ -71,7 +71,7 @@
     // Check if color is black
     if (color.brightnessComponent < 0.18) {
         // If it is, return 0's so we can set "on" to false
-        return [NSColor colorWithCalibratedHue:0 saturation:0 brightness:0 alpha:0];
+        color = [NSColor colorWithCalibratedHue:0 saturation:0 brightness:0 alpha:0];
     }
     if (color.saturationComponent < 0.2) {
         color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
