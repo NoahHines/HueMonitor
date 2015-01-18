@@ -2,10 +2,11 @@
 
 MovieMood allows you to set points of interest on your OSX display that trigger your Philips Hue lightbulbs.
 
-  - points of interest extract average RGB values
+  - Points of interest extract average RGB values
   - Support for unlimited bulbs
+  - Reacts fast to quick color changes
 
-MovieMood is the perfect entertainment. Sync the Hue bulbs in your house to your favorite music videos, video games, and movies. Or just let your computer set the ambiance to your work desk.
+MovieMood is a great source of entertainment for any owner of the Philips Hue lightbulb. Sync the Hue bulbs to your favorite music videos, video games, and movies. Or just let your computer set the ambiance to your everyday work desk.
 
 ### Installation
 
@@ -29,6 +30,7 @@ We love contributions. Please feel free to fork the repo and submit your well-do
 
 ### Todo's
 
+ - Allow user to specify username and bulbs via GUI
  - Add support to sync brightness with system audio
  - Improve UI
  - Improve color response (HTTP Post speed is current bottleneck)
@@ -41,7 +43,7 @@ MIT
 1.0.0
 
 #### The [MHacks](http://mhacks.org) Team:
-[Mark Linington](http://google.com), 
-[Noah Hines](http://), 
-[Mike Pasquale](http://), 
-[Sevag Nadjaren](http://)
+Mark Linington, 
+[Noah Hines](http://NoahHines.com), 
+Mike Pasquale, 
+Sevag Nadjaren
