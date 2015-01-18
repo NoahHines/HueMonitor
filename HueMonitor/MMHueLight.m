@@ -32,8 +32,11 @@
     return self;
 }
 
+// Send asynchronous request to hue bulbs
 + (void) getNumberOfLights:(void (^)(NSURLResponse *response, NSData *data, NSError *connectionError))completionHandler
 {
+    // Hardcoded bridge IP and username.
+    // Follow instructions at http://www.developers.meethue.com/documentation/getting-started to create your username
     NSURL *url = [NSURL URLWithString:@"http://10.0.1.2/api/newdeveloper/lights"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"GET"];
@@ -66,15 +69,18 @@
     
     self.previousSetColor = colorToSend;
     
+    // Philips API's hue is from 0 to 65535.
     CGFloat inputHue = 65535.0*[colorToSend hueComponent];
+    // Philips API's saturation is from 0 to 255
     CGFloat inputSat = 255.0*[colorToSend saturationComponent];
+    // Philips API's brightness is from 0 to 255
     CGFloat inputBri = 255.0*[colorToSend brightnessComponent];
         
     // URL is hardcoded to default Philips Hue url
     NSString * urlStr = [NSString stringWithFormat:@"http://10.0.1.2/api/newdeveloper/lights/%@/state/", self.lightID];
     NSURL *url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
-    
+    // Send HTTP Put request to Philips hue restful api
     [request setHTTPMethod:@"PUT"];
     
     // Set the content type for the HTTP PUT request
@@ -84,9 +90,10 @@
     httpBody[@"hue"] = [NSNumber numberWithInt:(int)inputHue];
     httpBody[@"sat"] = [NSNumber numberWithInt:(int)inputSat];
     httpBody[@"bri"] = [NSNumber numberWithInt:(int)inputBri];
+    // Default transition time is 4. Speeding it up a bit makes it more responsive.
     httpBody[@"transitiontime"] = [NSNumber numberWithInt:3];
 
-    // If RGB < 0.06 turn off lights
+    // If RGB < 0.06, turn off lights
     if ((colorToSend.redComponent < 0.06) && (colorToSend.greenComponent < 0.06) && (colorToSend.blueComponent < 0.06)) {
         NSLog(@"Good stuff.");
         httpBody[@"on"] = [NSNumber numberWithBool:NO];
