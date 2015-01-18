@@ -68,7 +68,17 @@
         
         NSColor *color = pixelArray[pixelArray.count/2];
         
-        color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
+        // Check if color is black
+        if (color.brightnessComponent < 0.18) {
+            // If it is, return 0's so we can set "on" to false
+            color = [NSColor colorWithCalibratedHue:0 saturation:0 brightness:0 alpha:0];
+        }
+        if (color.saturationComponent < 0.2) {
+            color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent brightness:color.brightnessComponent alpha:1];
+            
+        } else {
+            color = [NSColor colorWithCalibratedHue:color.hueComponent saturation:color.saturationComponent*2 brightness:color.brightnessComponent alpha:1];
+        }
         [self.lightArray[i] sendColor:color];
     }
 }
