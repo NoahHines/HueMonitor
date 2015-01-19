@@ -1,12 +1,12 @@
-# MovieMood
+# HueMonitor
 
-MovieMood allows you to set points of interest on your OSX display that trigger your Philips Hue lightbulbs.
+HueMonitor allows you to set points of interest on your OSX display that trigger your Philips Hue lightbulbs.
 
   - Points of interest extract average RGB values
   - Support for unlimited bulbs
   - Reacts fast to quick color changes
 
-MovieMood is a great source of entertainment for any owner of the Philips Hue lightbulb. Sync the Hue bulbs to your favorite music videos, video games, and movies. Or just let your computer set the ambiance to your everyday work desk.
+HueMonitor is a great source of entertainment for any owner of the Philips Hue lightbulb. Sync the Hue bulbs to your favorite music videos, video games, and movies. Or just let your computer set the ambiance to your everyday work desk.
 
 ### Installation
 
